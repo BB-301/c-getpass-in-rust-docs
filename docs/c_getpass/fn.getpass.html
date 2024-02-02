@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="A function that can be used to try to read a password (or a string containing sensible information) from `/dev/tty`, instead of `stdin`, thus hiding the input from the screen while it is being typed."><title>getpass in c_getpass - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-9ee3a5e31a2afa3e.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="c_getpass" data-themes="" data-resource-suffix="" data-rustdoc-version="1.75.0 (82e1608df 2023-12-21)" data-channel="1.75.0" data-search-js="search-8fbf244ebcf71464.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="sidebar-items.js"></script><script defer src="../static.files/main-9dd44ab47b99a0fb.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../c_getpass/index.html">c_getpass</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"></div></nav><main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Function <a href="index.html">c_getpass</a>::<wbr><a class="fn" href="#">getpass</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../src/c_getpass/lib.rs.html#49-65">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><pre class="rust item-decl"><code>pub fn getpass(
+    max_len: <a class="primitive" href="https://doc.rust-lang.org/1.75.0/std/primitive.usize.html">usize</a>,
+    prompt: <a class="enum" href="https://doc.rust-lang.org/1.75.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;impl <a class="trait" href="https://doc.rust-lang.org/1.75.0/alloc/string/trait.ToString.html" title="trait alloc::string::ToString">ToString</a>&gt;
+) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.75.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="https://doc.rust-lang.org/1.75.0/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>, <a class="struct" href="https://doc.rust-lang.org/1.75.0/alloc/ffi/c_str/struct.IntoStringError.html" title="struct alloc::ffi::c_str::IntoStringError">IntoStringError</a>&gt;</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>A function that can be used to try to read a password (or a string
+containing sensible information) from <code>/dev/tty</code>, instead of <code>stdin</code>,
+thus hiding the input from the screen while it is being typed.</p>
+<h2 id="arguments"><a href="#arguments">Arguments</a></h2>
+<ul>
+<li><code>max_len</code> - The maximum length (in bytes) allowed for the user input,
+point beyond which the inputted characters will be ignored. This value
+must be greater than 0, else the process will be terminated.</li>
+<li><code>prompt</code> - An optional argument to be used as prompt on <code>stdout</code>.</li>
+</ul>
+<h2 id="returned-value"><a href="#returned-value">Returned value</a></h2>
+<p>The function returns a <a href="https://doc.rust-lang.org/1.75.0/core/result/enum.Result.html" title="enum core::result::Result"><code>Result</code></a> containing a <a href="https://doc.rust-lang.org/1.75.0/alloc/string/struct.String.html" title="struct alloc::string::String"><code>String</code></a> if successful,
+else at <a href="https://doc.rust-lang.org/1.75.0/alloc/ffi/c_str/struct.IntoStringError.html" title="struct alloc::ffi::c_str::IntoStringError"><code>std::ffi::IntoStringError</code></a>, which, in this context,
+could occur because <code>max_len</code> was reached and the <code>getpass</code> output was split
+in the middle of a multi-byte UTF-8 character. For instance, let’s say that we set
+<code>max_len = 1</code> but the user inputs <code>é</code>, which latter character maps to UTF-8 bytes <code>c3 a9</code>.
+In this case, the function will be calling <code>into_string</code> (on a <a href="https://doc.rust-lang.org/1.75.0/alloc/ffi/c_str/struct.CString.html" title="struct alloc::ffi::c_str::CString"><code>std::ffi::CString</code></a>
+object) on the <code>[0xc3]</code> buffer, which will cause the error.</p>
+<h2 id="warning"><a href="#warning">Warning</a></h2>
+<p>The user should get acquainted with the information available in <code>man 3 getpass</code>
+on the target system before using this function.</p>
+<h2 id="examples"><a href="#examples">Examples</a></h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>c_getpass::getpass;
+
+<span class="comment">// Using a prompt
+</span><span class="kw">let </span>max_len: usize = <span class="number">5</span>;
+<span class="kw">let </span>prompt = <span class="prelude-val">Some</span>(<span class="string">&quot;Enter a secret value: &quot;</span>);
+<span class="kw">let </span>secret_value = getpass(max_len, prompt).expect(<span class="string">&quot;a multi-byte character was probably split&quot;</span>);
+<span class="macro">assert!</span>(secret_value.len() &lt;= max_len);
+<span class="macro">println!</span>(<span class="string">&quot;secret_value[{}] = {}&quot;</span>, secret_value.len(), secret_value);
+
+<span class="comment">// Without a prompt
+</span><span class="kw">let </span>max_len: usize = <span class="number">50</span>;
+<span class="kw">let </span>secret_value = getpass(max_len, &lt;<span class="prelude-ty">Option</span>&lt;String&gt;&gt;::None)
+    .expect(<span class="string">&quot;a multi-byte character was probably split&quot;</span>);
+<span class="macro">assert!</span>(secret_value.len() &lt;= max_len);
+<span class="macro">println!</span>(<span class="string">&quot;secret_value[{}] = {}&quot;</span>, secret_value.len(), secret_value);</code></pre></div>
+</div></details></section></div></main></body></html>
